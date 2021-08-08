@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydb       
+  labels:      
+    app: mydb
+spec:
+  selector:
+    matchLabels:
+      app: mydb
+  template:
+    metadata:
+      labels:
+        app: mydb
+    spec:                           
+      containers:
+      - name: mydb 
+        image: plaulkar/mysql_custom:default_auth_native_password
+        ports:
+        - containerPort: 3306

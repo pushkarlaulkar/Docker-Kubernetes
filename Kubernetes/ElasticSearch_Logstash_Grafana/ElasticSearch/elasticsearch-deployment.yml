@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch       
+  labels:          
+    app: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch                                                                               
+    spec:                                                                                   
+      containers:
+      - name: elasticsearch
+        image: plaulkar/elasticsearch_logstash_grafana:elasticsearch
+        ports:
+        - containerPort: 9200
+        livenessProbe:
+          exec:
+            command:
+            - curl
+            - --fail
+            - -X
+            - GET
+            - "localhost:9200/_cluster/health?&pretty"
+          initialDelaySeconds: 60
+          periodSeconds: 60

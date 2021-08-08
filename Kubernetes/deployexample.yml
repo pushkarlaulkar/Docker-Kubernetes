@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prod       
+  labels:          
+    app: prod
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: prod
+  template:
+    metadata:
+      labels:
+        app: prod                                                                                      
+    spec:                                                                                   
+      containers:
+      - name: prod
+        image: linuxacademycontent/store-products:1.0.0
+        ports:
+        - containerPort: 80
