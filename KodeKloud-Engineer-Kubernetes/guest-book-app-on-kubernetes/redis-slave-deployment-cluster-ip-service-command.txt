@@ -1,0 +1,1 @@
+kubectl expose deployment redis-slave --name=redis-slave --port=6379 --protocol=TCP --target-port=6379 --type=ClusterIP
